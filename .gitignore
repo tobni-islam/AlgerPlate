@@ -1,0 +1,5 @@
+data/raw/
+data/augmented/
+training/runs/
+models/*.pt
+.env
