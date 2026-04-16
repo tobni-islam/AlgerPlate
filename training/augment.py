@@ -1,15 +1,18 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import albumentations as A
 import cv2
 import numpy as np
 
+os.environ["OMP_NUM_THREADS"] = "1"
+
 
 class AugmentationPipeline:
     def __init__(
-        self, output_dir: str | Path, copies_per_image: int = 5, seed: int = 42
+        self, output_dir: str | Path, copies_per_image: int = 3, seed: int = 42
     ) -> None:
         self.output_dir = Path(output_dir)
         self.copies_per_image = copies_per_image
@@ -23,11 +26,11 @@ class AugmentationPipeline:
             [
                 A.RandomBrightnessContrast(p=0.6),
                 A.MotionBlur(blur_limit=7, p=0.3),
-                A.GaussNoise(var_limit=(10, 50), p=0.3),
+                A.GaussNoise(std_range=(0.02, 0.1), p=0.3),
                 A.Perspective(scale=(0.02, 0.08), p=0.4),
                 A.HueSaturationValue(p=0.3),
                 A.RandomShadow(p=0.2),
-                A.Downscale(scale_min=0.5, scale_max=0.9, p=0.2),
+                A.Downscale(scale_range=(0.5, 0.9), p=0.2),
                 A.CLAHE(p=0.2),
             ],
             bbox_params=A.BboxParams(
@@ -115,7 +118,7 @@ class AugmentationPipeline:
 
 if __name__ == "__main__":
     pipeline = AugmentationPipeline(
-        output_dir="data/augmented", copies_per_image=5, seed=42
+        output_dir="data/augmented", copies_per_image=3, seed=42
     )
     pipeline.run(
         images_dir="data/annotated/images/train",
