@@ -1,0 +1,8 @@
+path: /home/islam_tb/Documents/AlgerPlate
+train: data/annotated/images/train
+val:   data/annotated/images/val
+test:  data/annotated/images/test
+
+nc: 1
+names:
+  0: plate
