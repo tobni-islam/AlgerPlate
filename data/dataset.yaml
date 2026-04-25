@@ -1,5 +1,7 @@
 path: /home/islam_tb/Documents/AlgerPlate
-train: data/annotated/images/train
+train: 
+  - data/annotated/images/train
+  - data/augmented/images
 val:   data/annotated/images/val
 test:  data/annotated/images/test
 
