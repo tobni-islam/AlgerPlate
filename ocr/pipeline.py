@@ -1,10 +1,16 @@
+import os
+import sys
 import time
 
 import cv2
-from plate_reader import PlateReader
-from postprocess import parse_plate_text
-from preprocess import crop_plate
-from ultralytics import YOLO
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), ".")))
+
+
+from plate_reader import PlateReader  # noqa: E402
+from postprocess import parse_plate_text  # noqa: E402
+from preprocess import crop_plate  # noqa: E402
+from ultralytics import YOLO  # noqa: E402
 
 
 def run_pipeline(

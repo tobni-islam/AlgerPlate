@@ -1,10 +1,16 @@
+import os
+import sys
+
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from PIL import Image
-from preprocess import ensemble_voting_system
-from torchvision import transforms
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), ".")))
+
+from preprocess import ensemble_voting_system  # noqa: E402
+from torchvision import transforms  # noqa: E402
 
 
 class DigitClassifierTL(nn.Module):
@@ -107,7 +113,7 @@ class PlateReader:
         """Production method: Returns text, avg_conf, min_conf."""
         # Segmentation
         segmented_chars = ensemble_voting_system(plate_img)
-        if not segmented_chars:
+        if len(segmented_chars) == 0:
             return "", 0.0, 0.0
 
         # Recognition

@@ -2,12 +2,17 @@ from __future__ import annotations
 
 import argparse
 import csv
+import os
+import sys
 from pathlib import Path
 
+from PIL import Image
 from ultralytics import YOLO
 
-from ocr.pipeline import run_pipeline
-from ocr.plate_reader import PlateReader
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from ocr.pipeline import run_pipeline  # noqa: E402
+from ocr.plate_reader import PlateReader  # noqa: E402
 
 
 def char_accuracy(predicted: str, ground_truth: str) -> tuple[int, int]:
@@ -28,12 +33,19 @@ def main(gt_csv: str, weights: str) -> None:
     full_match = 0
     rows_evaluated = 0
 
+    first = True
     with open(gt_csv) as f:
         for row in csv.DictReader(f):
             img_path = img_dir / row["filename"]
             if not img_path.exists():
                 print(f"SKIP (not found): {row['filename']}")
                 continue
+
+            # display the first image
+            if first:
+                Image.open(img_path).show()
+                first = False
+
             results = run_pipeline(str(img_path), model, reader)
             if not results:
                 print(f"NO DETECTION: {row['filename']}")

@@ -1,0 +1,19 @@
+# Deep Learning & Hardware
+torch==2.7.1
+torchvision==0.22.1
+triton==3.3.1
+ultralytics==8.4.32
+ultralytics-thop==2.0.18
+
+# Data Science & Numerical
+numpy==2.4.4
+pandas==2.3.3
+scipy==1.17.1
+matplotlib==3.10.8
+scikit-learn==1.8.0
+
+# Computer Vision
+opencv-python==4.13.0.92
+opencv-contrib-python==4.10.0.84
+albumentations==2.0.8
+pillow==12.1.1

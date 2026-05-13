@@ -23,12 +23,8 @@ ALLOWED_TYPES = {"image/jpeg", "image/png", "image/jpg"}
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    _state["model"] = YOLO(
-        "/home/islam_tb/Documents/AlgerPlate/models/best_detection_model.pt"
-    )
-    _state["reader"] = PlateReader(
-        "/home/islam_tb/Documents/AlgerPlate/models/best_digit_model.pth"
-    )
+    _state["model"] = YOLO("/app/models/best_detection_model.pt")
+    _state["reader"] = PlateReader("/app/models/best_digit_model.pth")
     yield
 
 
