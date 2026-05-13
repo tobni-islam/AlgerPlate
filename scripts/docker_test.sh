@@ -1,7 +1,6 @@
 #!/bin/bash
 
 docker compose up -d
-sleep 90    # PaddleOCR loads inside container
 
 # All three endpoints from the host machine
 curl http://localhost:8000/health

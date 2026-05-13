@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 poetry run uvicorn api.main:app --port 8000 &
 SERVER_PID=$!
 sleep 45    # wait for model to load
