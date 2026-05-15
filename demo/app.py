@@ -77,10 +77,9 @@ demo = gr.Interface(
         gr.Image(label="Detection result"),
         gr.Textbox(label="Extracted plate fields", lines=6),
     ],
-    title="AlgerPlate — Algerian License Plate Recognition",
+    title="AlgerPlate - Algerian License Plate Recognition",
     description=(
         "Upload an image containing an Algerian license plate. "
-        "Detects with YOLOv8s (mAP@50: 0.993), "
         "then reads wilaya + serial + year."
     ),
     flagging_mode="never",

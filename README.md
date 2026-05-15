@@ -4,12 +4,28 @@
 [![Dataset](https://img.shields.io/badge/%F0%9F%A4%97-Dataset-blue)](https://huggingface.co/datasets/tobni/algerian-license-plates)
 [![mAP@50](https://img.shields.io/badge/mAP%4050-0.993-brightgreen)]()
 [![Python](https://img.shields.io/badge/python-3.11-blue)]()
+[![Model](https://img.shields.io/badge/CNN-Digit_Classifier-brightgreen)]()
+[![Segmentation](https://img.shields.io/badge/Segmentation-Ensemble_Voting-blue)]()
 
 **Live demo:** https://tobni-algerplate.hf.space
 
 ![Demo](assets/demo.gif)
 
 ---
+
+## Architecture
+
+![Architecture](assets/architecture.png)
+
+Three-stage custom pipeline - no external OCR engine.
+
+| Stage | Component | Detail | Latency |
+|-------|-----------|--------|---------|
+| Detection | YOLOv8s | mAP@50: 0.993 | ~150 ms |
+| Segmentation | ensemble_voting_system() | 3 strategies + voting | ~30 ms |
+| Classification | DigitClassifierTL CNN | 10-class digit classifier | ~50 ms |
+| Repair | _apply_smart_repair() | Algerian plate domain rules | <5 ms |
+| **Total** | | | **<1.5 s** |
 
 
 ## Results
@@ -19,6 +35,9 @@
 | mAP@50 | 0.994    | 0.993    |
 | Precision | 0.973 | 0.984    |
 | Recall | 1.000    | 0.975     |
+
+> Accuracy measured with custom CNN digit classifier + ensemble
+> segmentation. No external OCR engine used.
 
 ![Training curve](assets/training_curve.png)
 
