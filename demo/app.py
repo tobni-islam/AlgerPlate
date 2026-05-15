@@ -24,7 +24,7 @@ def _draw_boxes(image_rgb: np.ndarray, plates: list[dict]) -> np.ndarray:
     out = image_rgb.copy()
     for p in plates:
         x1, y1, x2, y2 = p["bbox"]
-        cv2.rectangle(out, (x1, y1), (x2, y2), (0, 200, 100), 3)
+        cv2.rectangle(out, (x1, y1), (x2, y2), (255, 0, 0), 3)
         label = p["raw_text"] if p["raw_text"] else "plate"
         cv2.putText(
             out,
@@ -32,7 +32,7 @@ def _draw_boxes(image_rgb: np.ndarray, plates: list[dict]) -> np.ndarray:
             (x1, max(y1 - 8, 10)),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.7,
-            (0, 200, 100),
+            (255, 0, 0),
             2,
         )
     return out
@@ -59,6 +59,7 @@ def detect_plate(image: np.ndarray) -> tuple[np.ndarray, str]:
     for i, p in enumerate(plates, 1):
         lines.append(
             f"Plate {i}:\n"
+            f"full license number : {p['raw_text'] or chr(8212)}\n"
             f"  Wilaya : {p['wilaya'] or chr(8212)}\n"
             f"  Serial : {p['serial'] or chr(8212)}\n"
             f"  Year   : {p['year'] or chr(8212)}\n"
