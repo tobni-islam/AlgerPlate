@@ -2,5 +2,7 @@ data/raw/
 data/augmented/
 training/runs/
 data/annotated/images
+data/annotated/labels
+data/LP Data/Images
 models/*.pt
 .env
