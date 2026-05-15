@@ -16,11 +16,9 @@
 
 | Metric | Val set | Test set |
 |--------|---------|----------|
-| mAP@50 | 0.993 | X.XX |
-| Precision | X.XX | X.XX |
-| Recall | X.XX | X.XX |
-| Latin serial accuracy | — | 93.6% |
-| Arabic wilaya accuracy | — | 85.0% |
+| mAP@50 | 0.994    | 0.993    |
+| Precision | 0.973 | 0.984    |
+| Recall | 1.000    | 0.975     |
 
 ![Training curve](assets/training_curve.png)
 
